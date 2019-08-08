@@ -1,0 +1,43 @@
+{
+  "name": "stream-p2p",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "author": "shinyoshiaki",
+  "license": "GPL-3.0",
+  "engines": {
+    "node": ">=11"
+  },
+  "scripts": {
+    "build": "tsc",
+    "type": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/dom-mediacapture-record": "^1.0.1",
+    "@types/jest": "^24.0.6",
+    "@types/node": "^10.11.7",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)(spec|test).ts?(x)",
+      "**/?(*)(spec|test).ts?(x)"
+    ]
+  }
+}
