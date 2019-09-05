@@ -1,15 +1,30 @@
 import Kademlia from "../../../pkg/kad-rtc/src";
-import store from "../../domain/world/store";
+import store, { storeOrder } from "../../domain/world/store";
+import Services from "../../service";
+import { Store } from "../../../pkg/kad-rtc/src/kademlia/actions/store";
+import createNavigator from "../../domain/navigator/create";
 
 export default class MainWorld {
-  seedList: SeedList = {};
+  constructor(private services: typeof Services, private mainKad: Kademlia) {
+    let navigator: ReturnType<typeof createNavigator>;
 
-  constructor(private mainKad: Kademlia) {}
+    mainKad.event.subscribe(data => {
+      const { rpc } = data;
+      if (rpc === "Store") {
+        const { key, value, msg } = (data as any) as Store;
+        switch (msg) {
+          case storeOrder:
+            navigator = createNavigator();
+            break;
+        }
+      }
+    });
+  }
 
   async store(name: string, ab: ArrayBuffer) {
+    const { SeedList } = this.services;
+
     const url = await store(name, ab, this.mainKad);
-    this.seedList[url] = ab;
+    SeedList.addSeed(url, ab);
   }
 }
-
-type SeedList = { [url: string]: ArrayBuffer };

@@ -1,5 +1,6 @@
 import inject from "typed-di";
+import SeedList from "./world/seedlist";
 
-const di = inject({});
+const Services = inject({ SeedList });
 
-export default di;
+export default Services;
