@@ -38,6 +38,7 @@ export default class Kademlia {
     return target;
   }
 
+  /**rpc : Store */
   async store(key: string, value: string | ArrayBuffer, msg?: string) {
     return await store(this.di, key, value, msg);
   }
