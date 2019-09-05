@@ -15,7 +15,7 @@ class PeerClass {
 
 type PeerProps = {
   type: string;
-  onRpc: Event<any>;
+  onRpc: Event<RPC>;
   onDisconnect: Event;
   onConnect: Event;
   parseRPC: (data: ArrayBuffer) => RPC | undefined;

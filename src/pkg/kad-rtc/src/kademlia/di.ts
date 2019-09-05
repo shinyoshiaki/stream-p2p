@@ -3,6 +3,7 @@ import Modules from "./modules";
 import RpcManager from "./services/rpcmanager";
 import Signaling from "./services/signaling";
 import JobSystem from "./services/jobsystem";
+import KadEvent from "./services/event";
 
 type Options = Option;
 
@@ -12,6 +13,7 @@ export type DependencyInjection = {
   rpcManager: RpcManager;
   signaling: Signaling;
   jobSystem: JobSystem;
+  event: KadEvent;
 };
 
 export const dependencyInjection = (
@@ -24,6 +26,7 @@ export const dependencyInjection = (
     kTable: new Ktable(kid, opt),
     rpcManager: new RpcManager(),
     signaling: new Signaling(modules.peerCreate),
-    jobSystem: new JobSystem()
+    jobSystem: new JobSystem(),
+    event: new KadEvent()
   };
 };

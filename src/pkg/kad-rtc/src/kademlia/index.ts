@@ -1,16 +1,18 @@
 import { Option as OptTable } from "./ktable";
 import findNode from "./actions/findnode";
-import { Peer } from "./modules/peer/base";
+import { Peer, RPC } from "./modules/peer/base";
 import { DependencyInjection, dependencyInjection } from "./di";
 import store from "./actions/store";
 import findValue from "./actions/findvalue";
 import { listeners } from "./listeners";
 import Modules from "./modules";
+import Event from "rx.mini";
 
 type Options = OptTable;
 
 export default class Kademlia {
   di: DependencyInjection;
+  event = new Event<RPC>();
 
   constructor(
     public kid: string,
@@ -18,6 +20,7 @@ export default class Kademlia {
     private opt: Partial<Options> = {}
   ) {
     this.di = dependencyInjection(kid, modules, opt);
+    this.di.event.event.subscribe(this.event.execute);
   }
 
   async findNode(searchkid: string) {
