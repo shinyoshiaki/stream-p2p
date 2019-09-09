@@ -6,7 +6,12 @@ export type Meta<T extends Type> = {
 
 export type Type = "static" | "stream";
 
-type Static = { hash: string };
+type Static = {
+  hash: string;
+  blocks: Block[];
+};
+
+export type Block = { i: number; k: string; v: ArrayBuffer };
 
 const test: Meta<"stream"> = {
   name: "a",

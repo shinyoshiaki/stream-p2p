@@ -1,7 +1,8 @@
 import Kademlia from "../../../pkg/kad-rtc/src";
-import { Meta } from "../../model/meta";
+import { Meta, Block } from "../../model/meta";
 import sha1 from "sha1";
 import { prefix } from "../../const";
+import { sliceArraybuffer } from "../../util/arraybuffer";
 
 export default async function store(
   name: string,
@@ -9,7 +10,17 @@ export default async function store(
   mainKad: Kademlia
 ) {
   const hash = sha1(new Buffer(ab));
-  const meta: Meta<"static"> = { name, type: "static", payload: { hash } };
+  const blocks: Block[] = sliceArraybuffer(ab, 16000).map((v, i) => ({
+    i,
+    k: sha1(new Buffer(v)),
+    v
+  }));
+
+  const meta: Meta<"static"> = {
+    name,
+    type: "static",
+    payload: { hash, blocks }
+  };
 
   const metaStr = JSON.stringify(meta);
   const url = sha1(metaStr);
