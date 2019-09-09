@@ -1,5 +1,5 @@
 import Event from "rx.mini";
-import { Signal } from "webrtc4me";
+import WebRTC, { Signal } from "webrtc4me";
 
 export type RPC = {
   rpc: string;
@@ -18,6 +18,7 @@ type PeerProps = {
   onRpc: Event<RPC>;
   onDisconnect: Event;
   onConnect: Event;
+  rtc: WebRTC;
   parseRPC: (data: ArrayBuffer) => RPC | undefined;
   rpc: (data: { rpc: string; id: string }) => void;
   eventRpc: <T extends { rpc: string }>(rpc: T["rpc"], id: string) => Event<T>;
@@ -32,6 +33,7 @@ export class PeerMock implements Peer {
   onRpc = new Event<any>();
   onDisconnect = new Event();
   onConnect = new Event();
+  rtc = null as any;
 
   constructor(public kid: string) {}
 

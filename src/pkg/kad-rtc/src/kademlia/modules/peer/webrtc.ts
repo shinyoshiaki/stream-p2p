@@ -9,16 +9,16 @@ export const PeerModule = (kid: string) => new PeerWebRTC(kid);
 
 export default class PeerWebRTC implements Peer {
   type = "webrtc";
-  peer: WebRTC = new WebRTC({ disable_stun: true, wrtc });
+  rtc: WebRTC = new WebRTC({ disable_stun: true, wrtc });
   onRpc = new Event<RPC>();
   onDisconnect = new Event();
   onConnect = new Event();
 
   constructor(public kid: string) {
-    this.peer.nodeId = kid;
-    this.peer.onConnect.once(() => this.onConnect.execute(null));
-    this.peer.onDisconnect.once(() => this.onDisconnect.execute(null));
-    const { unSubscribe } = this.peer.onData.subscribe(
+    this.rtc.nodeId = kid;
+    this.rtc.onConnect.once(() => this.onConnect.execute(null));
+    this.rtc.onDisconnect.once(() => this.onDisconnect.execute(null));
+    const { unSubscribe } = this.rtc.onData.subscribe(
       ({ label, data, dataType }) => {
         try {
           if (label == "datachannel" && dataType === "ArrayBuffer") {
@@ -48,12 +48,12 @@ export default class PeerWebRTC implements Peer {
 
   rpc = (send: RPC) => {
     const packet = encode(send);
-    this.peer.send(packet);
+    this.rtc.send(packet);
   };
 
   eventRpc = (rpc: string, id: string) => {
     const observer = new Event<any>();
-    const { unSubscribe } = this.peer.onData.subscribe(
+    const { unSubscribe } = this.rtc.onData.subscribe(
       ({ label, data, dataType }) => {
         if (label == "datachannel" && dataType === "ArrayBuffer") {
           const obj = this.parseRPC(data as ArrayBuffer);
@@ -70,22 +70,22 @@ export default class PeerWebRTC implements Peer {
   };
 
   createOffer = async () => {
-    this.peer.makeOffer();
-    const offer = await this.peer.onSignal.asPromise();
+    this.rtc.makeOffer();
+    const offer = await this.rtc.onSignal.asPromise();
     await new Promise(r => setTimeout(r, 0));
     return offer;
   };
 
   setOffer = async (offer: Signal) => {
-    this.peer.setSdp(offer);
-    const answer = await this.peer.onSignal.asPromise();
+    this.rtc.setSdp(offer);
+    const answer = await this.rtc.onSignal.asPromise();
     await new Promise(r => setTimeout(r, 0));
     return answer;
   };
 
   setAnswer = async (answer: Signal) => {
-    this.peer.setSdp(answer);
-    const err = await this.peer.onConnect
+    this.rtc.setSdp(answer);
+    const err = await this.rtc.onConnect
       .asPromise(timeout)
       .catch(e => new Error(e));
     if (err) this.onConnect.error(err);
@@ -93,6 +93,6 @@ export default class PeerWebRTC implements Peer {
   };
 
   disconnect = () => {
-    this.peer.hangUp();
+    this.rtc.hangUp();
   };
 }
