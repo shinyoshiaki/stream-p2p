@@ -1,4 +1,4 @@
-import { Peer, BaseRPC } from "../../../modules/peer/base";
+import { Peer } from "../../../modules/peer/base";
 import { DependencyInjection } from "../../../di";
 import { listeners } from "../../../listeners";
 import { FindValueProxyOpen, FindValueProxyAnswer } from "./proxy";
@@ -49,7 +49,7 @@ export default class FindValuePeer {
   };
 }
 
-const FindValuePeerOffer = (peerkid: string, sdp?: string): BaseRPC => ({
+const FindValuePeerOffer = (peerkid: string, sdp?: string) => ({
   rpc: "FindValuePeerOffer" as const,
   sdp,
   peerkid

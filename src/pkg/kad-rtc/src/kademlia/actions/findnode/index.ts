@@ -5,7 +5,7 @@ import {
 } from "./listen/proxy";
 import { DependencyInjection } from "../../di";
 import { listeners } from "../../listeners";
-import { Peer, BaseRPC } from "../../modules/peer/base";
+import { Peer } from "../../modules/peer/base";
 import { timeout } from "../../const";
 
 export default async function findNode(
@@ -72,7 +72,7 @@ export default async function findNode(
   return kTable.getPeer(searchkid);
 }
 
-const FindNode = (searchkid: string, except: string[]): BaseRPC => ({
+const FindNode = (searchkid: string, except: string[]) => ({
   rpc: "FindNode" as const,
   searchkid,
   except
@@ -80,7 +80,7 @@ const FindNode = (searchkid: string, except: string[]): BaseRPC => ({
 
 export type FindNode = ReturnType<typeof FindNode>;
 
-const FindNodeAnswer = (sdp: string, peerkid: string): BaseRPC => ({
+const FindNodeAnswer = (sdp: string, peerkid: string) => ({
   rpc: "FindNodeAnswer" as const,
   sdp,
   peerkid

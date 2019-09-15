@@ -1,4 +1,4 @@
-import { Peer, BaseRPC } from "../../../modules/peer/base";
+import { Peer } from "../../../modules/peer/base";
 import { FindValuePeerOffer } from "./peer";
 import { DependencyInjection } from "../../../di";
 import { FindValue, FindValueAnswer } from "..";
@@ -64,9 +64,7 @@ export default class FindValueProxy {
   };
 }
 
-const FindValueResult = (
-  data: Partial<{ item: Item; offers: Offer[] }>
-): BaseRPC => ({
+const FindValueResult = (data: Partial<{ item: Item; offers: Offer[] }>) => ({
   rpc: "FindValueResult" as const,
   data
 });
@@ -75,14 +73,14 @@ export type Offer = { peerkid: string; sdp: string };
 
 export type FindValueResult = ReturnType<typeof FindValueResult>;
 
-const FindValueProxyOpen = (finderkid: string): BaseRPC => ({
+const FindValueProxyOpen = (finderkid: string) => ({
   rpc: "FindValueProxyOpen" as const,
   finderkid
 });
 
 export type FindValueProxyOpen = ReturnType<typeof FindValueProxyOpen>;
 
-const FindValueProxyAnswer = (sdp: string, finderkid: string): BaseRPC => ({
+const FindValueProxyAnswer = (sdp: string, finderkid: string) => ({
   rpc: "FindValueProxyAnswer" as const,
   sdp,
   finderkid

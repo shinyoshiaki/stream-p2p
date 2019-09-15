@@ -1,13 +1,10 @@
 import Event from "rx.mini";
 import WebRTC, { Signal } from "webrtc4me";
 
-export type RPC = BaseRPC & {
-  id: string;
-};
-
-export type BaseRPC = {
+export type RPC = {
   rpc: RPCType;
   [key: string]: any;
+  id: string;
 };
 
 export type RPCType =
