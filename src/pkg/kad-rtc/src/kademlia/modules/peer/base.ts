@@ -1,11 +1,31 @@
 import Event from "rx.mini";
 import WebRTC, { Signal } from "webrtc4me";
 
-export type RPC = {
-  rpc: string;
-  [key: string]: string | Buffer | ArrayBuffer;
+export type RPC = BaseRPC & {
   id: string;
 };
+
+export type BaseRPC = {
+  rpc: RPCType;
+  [key: string]: any;
+};
+
+export type RPCType =
+  | "FindValue"
+  | "FindNodeAnswer"
+  | "FindNode"
+  | "FindNodePeerOffer"
+  | "FindNodeProxyOffer"
+  | "FindNodeProxyOpen"
+  | "FindNodeProxyAnswer"
+  | "FindNodeProxyAnswerError"
+  | "FindValueAnswer"
+  | "FindValuePeerOffer"
+  | "FindValueResult"
+  | "FindValueProxyOpen"
+  | "FindValueProxyAnswer"
+  | "Store"
+  | "OnStore";
 
 export type Peer = PeerClass & PeerProps;
 

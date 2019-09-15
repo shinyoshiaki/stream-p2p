@@ -1,5 +1,5 @@
 import { Store } from "..";
-import { Peer } from "../../../modules/peer/base";
+import { Peer, BaseRPC } from "../../../modules/peer/base";
 import { DependencyInjection } from "../../../di";
 import { ID } from "../../../services/rpcmanager";
 
@@ -19,7 +19,7 @@ class ListenStore {
   };
 }
 
-const OnStore = () => {
+const OnStore = (): BaseRPC => {
   return { rpc: "OnStore" as const };
 };
 

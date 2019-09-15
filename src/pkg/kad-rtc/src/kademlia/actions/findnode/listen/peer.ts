@@ -1,4 +1,4 @@
-import { Peer } from "../../../modules/peer/base";
+import { Peer, BaseRPC } from "../../../modules/peer/base";
 import { FindNodeProxyOpen, FindNodeProxyAnswer } from "./proxy";
 import { DependencyInjection } from "../../../di";
 import { listeners } from "../../../listeners";
@@ -49,7 +49,7 @@ export default class FindNodePeer {
   };
 }
 
-const FindNodePeerOffer = (peerkid: string, sdp?: string) => ({
+const FindNodePeerOffer = (peerkid: string, sdp?: string): BaseRPC => ({
   rpc: "FindNodePeerOffer" as const,
   sdp,
   peerkid

@@ -1,7 +1,7 @@
 import { DependencyInjection } from "../../di";
 import { FindValueResult, Offer } from "./listen/proxy";
 import { listeners } from "../../listeners";
-import { Peer } from "../../modules/peer/base";
+import { Peer, BaseRPC } from "../../modules/peer/base";
 import { timeout } from "../../const";
 import { Item } from "../../modules/kvs/base";
 
@@ -88,7 +88,7 @@ export default async function findValue(key: string, di: DependencyInjection) {
   return result;
 }
 
-const FindValue = (key: string, except: string[]) => ({
+const FindValue = (key: string, except: string[]): BaseRPC => ({
   rpc: "FindValue" as const,
   key,
   except
@@ -96,7 +96,7 @@ const FindValue = (key: string, except: string[]) => ({
 
 export type FindValue = ReturnType<typeof FindValue>;
 
-const FindValueAnswer = (sdp: string, peerkid: string) => ({
+const FindValueAnswer = (sdp: string, peerkid: string): BaseRPC => ({
   rpc: "FindValueAnswer" as const,
   sdp,
   peerkid
