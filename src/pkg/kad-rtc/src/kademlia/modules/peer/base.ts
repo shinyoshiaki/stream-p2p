@@ -37,7 +37,7 @@ type PeerProps = {
   onConnect: Event;
   rtc: WebRTC;
   parseRPC: (data: ArrayBuffer) => RPC | undefined;
-  rpc: (data: { rpc: string; id: string }) => void;
+  rpc: (data: RPC) => void;
   eventRpc: <T extends { rpc: string }>(rpc: T["rpc"], id: string) => Event<T>;
   createOffer: () => Promise<Signal>;
   setOffer: (sdp: Signal) => Promise<Signal>;

@@ -10,6 +10,7 @@ import SuperStreamVideo from "./extensions/supermedia/streamer";
 import SuperReceiveVideo from "./extensions/supermedia/renderer";
 import StreamArraybuffer from "./extensions/abstream/streamer";
 import RenderArraybuffer from "./extensions/abstream/renderer";
+import Uuid from "./utill/uuid";
 
 export {
   PeerModule,
@@ -25,7 +26,8 @@ export {
   SuperStreamVideo,
   SuperReceiveVideo,
   StreamArraybuffer,
-  RenderArraybuffer
+  RenderArraybuffer,
+  Uuid
 };
 
 export default Kademlia;
