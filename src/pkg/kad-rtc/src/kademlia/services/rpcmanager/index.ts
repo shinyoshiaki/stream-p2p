@@ -7,7 +7,7 @@ export type ID = { id: string };
 export default class RpcManager {
   private uuid = new Uuid();
 
-  getWait<T extends { rpc: string; [key: string]: unknown }>(
+  getWait<T extends { rpc: string; [key: string]: any }>(
     peer: Peer,
     rpc: { rpc: string; [key: string]: any }
   ) {

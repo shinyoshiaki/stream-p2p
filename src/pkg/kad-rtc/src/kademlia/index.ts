@@ -12,7 +12,7 @@ type Options = OptTable;
 
 export default class Kademlia {
   di: DependencyInjection;
-  event = new Event<RPC & { peer: Peer }>();
+  rpcEvent = new Event<RPC & { peer: Peer }>();
 
   constructor(
     public kid: string,
@@ -20,7 +20,7 @@ export default class Kademlia {
     private opt: Partial<Options> = {}
   ) {
     this.di = dependencyInjection(kid, modules, opt);
-    this.di.event.rpcEvent.subscribe(this.event.execute);
+    this.di.rpcEvent.event.subscribe(this.rpcEvent.execute);
   }
 
   async findNode(searchkid: string) {

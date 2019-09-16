@@ -13,7 +13,7 @@ export type DependencyInjection = {
   rpcManager: RpcManager;
   signaling: Signaling;
   jobSystem: JobSystem;
-  event: KadEvent;
+  rpcEvent: KadEvent;
 };
 
 export const dependencyInjection = (
@@ -27,6 +27,6 @@ export const dependencyInjection = (
     rpcManager: new RpcManager(),
     signaling: new Signaling(modules.peerCreate),
     jobSystem: new JobSystem(),
-    event: new KadEvent()
+    rpcEvent: new KadEvent()
   };
 };

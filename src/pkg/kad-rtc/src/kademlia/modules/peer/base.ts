@@ -2,7 +2,7 @@ import Event from "rx.mini";
 import WebRTC, { Signal } from "webrtc4me";
 
 export type RPC = {
-  rpc: RPCType;
+  rpc: string;
   [key: string]: any;
   id: string;
 };
@@ -32,7 +32,7 @@ class PeerClass {
 
 type PeerProps = {
   type: string;
-  onRpc: Event<RPC>;
+  onRpc: Event<any>;
   onDisconnect: Event;
   onConnect: Event;
   rtc: WebRTC;
