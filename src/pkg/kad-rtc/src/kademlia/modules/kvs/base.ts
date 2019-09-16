@@ -1,13 +1,13 @@
 import Event from "rx.mini";
 
-export type Item = { value: string | ArrayBuffer; msg?: string };
+export type Item = { value: string | ArrayBuffer; msg?: string; key: string };
 
 export default class KevValueStore {
   db: { [key: string]: Item } = {};
   onSet = new Event<{ key: string; value: string | ArrayBuffer }>();
 
   set(key: string, value: string | ArrayBuffer, msg: string) {
-    this.db[key] = { value, msg };
+    this.db[key] = { value, msg, key };
     this.onSet.execute({ key, value });
   }
 

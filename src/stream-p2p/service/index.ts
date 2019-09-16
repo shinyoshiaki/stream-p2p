@@ -1,6 +1,11 @@
 import inject from "typed-di";
 import SeedList from "./world/seedlist";
+import NavigatorList from "./actor/navigatorlist";
 
-const Services = inject({ SeedList });
+const Services = inject({ SeedList, NavigatorList });
 
-export default Services;
+type Services = typeof Services;
+
+export { Services };
+
+export const createServices = () => inject({ SeedList, NavigatorList });

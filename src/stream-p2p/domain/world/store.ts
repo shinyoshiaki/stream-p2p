@@ -26,7 +26,7 @@ export default async function store(
   const url = sha1(metaStr);
   await mainKad.store(url, metaStr, storeOrder);
 
-  return url;
+  return { url, meta };
 }
 
 export const storeOrder = prefix + "world_store";
