@@ -285,6 +285,13 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
+"@msgpack/msgpack@^1.6.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@msgpack/msgpack/-/msgpack-1.9.0.tgz#a9bae8398148c90afbaa27714b447e6e8b840480"
+  integrity sha512-m3Z/dOzxgpHMoyeYInpQEPti/ThRRHdtU1ZtHZtJZhoRv9J+xRrRDEUaOf5c2GFf26jlc9HIqF2/ubeI46cvqQ==
+  dependencies:
+    base64-js "^1.3.0"
+
 "@types/babel__core@^7.1.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.2.tgz#608c74f55928033fce18b99b213c16be4b3d114f"
@@ -592,6 +599,11 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+
+base64-js@^1.3.0:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.1.tgz#58ece8cb75dd07e71ed08c736abc5fac4dbf8df1"
+  integrity sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
 
 base@^0.11.1:
   version "0.11.2"
@@ -2976,6 +2988,11 @@ rsvp@^4.8.4:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
 
+rx.mini@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rx.mini/-/rx.mini-0.1.0.tgz#629d5e9b607719749ed037f3ce4bb8ebf99d5300"
+  integrity sha512-3WrnZZXHw1kW+joNeLqZoFZpNMg0VH6B9Z06moMW2XVi1PLe+TL2t5ZQ2Z1U6XCSmyZLLxPRKZi34s+iadt7yA==
+
 safe-buffer@^5.0.1, safe-buffer@^5.1.2:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.0.tgz#b74daec49b1148f88c64b68d49b1e815c1f2f519"
@@ -3552,6 +3569,15 @@ webidl-conversions@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
   integrity sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==
+
+webrtc4me@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/webrtc4me/-/webrtc4me-0.7.1.tgz#c9c65e32a3ce911d9c5710ec797c4772a89136f6"
+  integrity sha512-dGWrjWnA7pqOud2RwgNS/a0kW+QJivl2M7sbnjH3szbwa+aUfjrQZ7RPvPhZV8OTzQq6dp0MpSTiq0rJU0u8Sg==
+  dependencies:
+    "@msgpack/msgpack" "^1.6.0"
+    rx.mini "^0.1.0"
+    ts-toolbelt "^3.2.24"
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   version "1.0.5"

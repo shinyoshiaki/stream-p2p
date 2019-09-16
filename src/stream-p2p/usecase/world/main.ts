@@ -1,4 +1,4 @@
-import Kademlia from "../../../pkg/kad-rtc/src";
+import Kademlia, { genKid } from "../../../pkg/kad-rtc/src";
 import store, { storeOrder } from "../../domain/world/store";
 import { Services } from "../../service";
 import { Store } from "../../../pkg/kad-rtc/src/kademlia/actions/store";
@@ -7,13 +7,15 @@ import { Meta } from "../../model/meta";
 import { findStatic } from "../../domain/world/find";
 import Seeder from "../actor/seeder";
 import { FindValue } from "../../../pkg/kad-rtc/src/kademlia/actions/findvalue";
+import { offerPeerLabel, OfferPeer } from "../../domain/peer/offer";
+import { setupAnswerPeer } from "../../domain/peer/answer";
 
 export default class MainWorld {
   constructor(private services: Services, private mainKad: Kademlia) {
     const { NavigatorList, SeedList } = services;
 
-    mainKad.event.subscribe(data => {
-      const { rpc, peer } = data;
+    mainKad.rpcEvent.subscribe(async data => {
+      const { rpc, peer, id } = data;
       switch (rpc) {
         case "Store":
           {
@@ -35,10 +37,23 @@ export default class MainWorld {
         case "FindValue": // from user
           {
             const { key } = (data as any) as FindValue;
-            if (SeedList.isSeedExist(key)) {
+            if (SeedList.isExist(key)) {
               const seeder = SeedList.list[key];
               seeder.addPeer(peer);
             } else {
+            }
+          }
+          break;
+        case offerPeerLabel:
+          {
+            const { url } = (data as any) as OfferPeer;
+            const joinPeer = mainKad.di.modules.peerCreate(genKid());
+            const res = await setupAnswerPeer(id, data as any, peer, joinPeer);
+            if (SeedList.isExist(url)) {
+              const seeder = SeedList.list[url];
+              seeder.addPeer(res);
+            } else if (NavigatorList.isExist(url)) {
+              const nav = NavigatorList.list[url];
             }
           }
           break;

@@ -46,6 +46,7 @@
   "dependencies": {
     "sha1": "^1.1.1",
     "ts-toolbelt": "^3.2.24",
-    "typed-di": "^0.0.1"
+    "typed-di": "^0.0.1",
+    "webrtc4me": "^0.7.1"
   }
 }

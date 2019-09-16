@@ -8,7 +8,7 @@ export default class SeedList {
     this.list[url] = seeder;
   }
 
-  isSeedExist(url: string) {
+  isExist(url: string) {
     return this.list[url] ? true : false;
   }
 }
