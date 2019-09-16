@@ -1,10 +1,10 @@
-import Kademlia, { Peer, PeerModule, genKid } from "../../../pkg/kad-rtc/src";
+import Kademlia, { Peer, genKid } from "../../../pkg/kad-rtc/src";
 import { FindValue } from "../../../pkg/kad-rtc/src/kademlia/actions/findvalue";
 import { prefix } from "../../const";
 
 export class Navigator {
   constructor(seederPeer: Peer, keyOfMeta: string, mainKad: Kademlia) {
-    mainKad.event.subscribe(async data => {
+    mainKad.rpcEvent.subscribe(async data => {
       const { rpc, peer } = data;
       if (rpc === "FindValue") {
         const { key } = (data as any) as FindValue;
